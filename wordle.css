@@ -1,0 +1,46 @@
+*{padding: 0;margin: 0;user-select: none;}
+body{display: flex;flex-direction: column;align-items: center;justify-content: flex-start;}
+header{width: 100%;text-align: center;padding: 2vh 0px;border-bottom: 1px solid #eee;display: flex;flex-direction: row;align-items: center;justify-content: center;}
+header span{font-size: 30px;font-family: 'Changa', sans-serif;background-color: green;width: 50px;border: 1px solid #aaa;height: 50px;margin: 0px 5px;color: #fff;display: block;line-height: 50px;animation: animateLOGO 3s 0s linear infinite normal;}
+.container{display: flex;flex-direction: column;align-items: center;justify-content: flex-start;padding: 2vh 0px;}
+.container .row{display: flex;flex-direction: row;align-items: center;justify-content: flex-start;}
+.col{width: 60px;height: 60px;border: 1px solid #aaa;margin: 10px 5px;text-align: center;
+	font-size: 30px;font-weight: bold;line-height: 60px;font-family: 'Play', sans-serif;
+}
+#submit{padding: 10px 25px;border: none;border: 1px solid #07ba99;outline: none;background-color:#07ba99;
+		color: #fff;border-radius: 10px;cursor: pointer;}
+input{cursor: default;text-align: center;border: none;outline: none;color: #fff;font-size: 2px;}
+#submit:hover{color: #07ba99;background-color: #fff;transition-duration: 0.5s;}
+@media screen and (max-width: 400px){
+	.col{
+		width: 50px;height: 50px;margin: 5px 3px;
+	}
+}
+@keyframes turnCard{
+	0%{
+		transform: rotateX(0deg);
+	}
+	100%{
+		transform: rotateX(180deg);
+	}
+}
+@keyframes animateLOGO{
+	0%{
+		background-color: #fff;color: #000;
+	}
+	30%{
+		background-color: #fff;color: #000;
+	}
+	33%{
+		background-color: #555;color: #fff;
+	}
+	63%{
+		background-color: #555;color: #fff;
+	}
+	66%{
+		background-color: green;color: #fff;
+	}
+	99%{
+		background-color: green;color: #fff;
+	}
+}

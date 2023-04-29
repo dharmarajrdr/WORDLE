@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Wordle</title>
+	<link rel="stylesheet" type="text/css" href="wordle.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Changa:wght@300&family=Play:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<span>R</span><span>D</span><span>R</span>
+	</header>
+	<input type="text" id='secretField' autofocus maxlength="5" minlength="5" spellcheck="false" autocomplete="off">
+	<div class='container'>
+		<div class='row'>
+			<div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+		</div>
+		<div class='row'>
+			<div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+		</div>
+		<div class='row'>
+			<div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+		</div>
+		<div class='row'>
+			<div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+		</div>
+		<div class='row'>
+			<div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+		</div>
+		<div class='row'>
+			<div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+		</div>
+	</div>
+	<!-- <p class='details'></p> -->
+	<button id='submit'>CHECK</button>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" >
+		$(document).ready(function(){
+			var correctWord = "DHONI";
+			var col = 0,count = 0,row=0;
+			var typingWord = "";
+			$('html').click(function(){
+				$('#secretField').focus();
+			});
+			$('#submit').click(function(){
+				let enteredWord = $('#secretField').val().toUpperCase();
+				if(enteredWord.length!=5){
+					return;
+				}
+				if(enteredWord == correctWord){
+					//	correct
+				}
+				var startIndex = row*5;
+				for(let i=0;i<5;i++,startIndex++){
+					if(enteredWord.charAt(i) === correctWord.charAt(i)){
+						$('.row').children('.col:eq('+startIndex+')').css('background-color','green');
+						$('.row').children('.col:eq('+startIndex+')').css('color','white');
+						$('.row').children('.col:eq('+startIndex+')').css('animation','turnCard 0.25s 0s linear 1 normal');
+						continue;
+					}
+					if(correctWord.includes(enteredWord.charAt(i))){
+						$('.row').children('.col:eq('+startIndex+')').css('background-color','#555');
+						$('.row').children('.col:eq('+startIndex+')').css('color','white');
+						$('.row').children('.col:eq('+startIndex+')').css('animation','turnCard 0.25s 0s linear 1 normal');
+						continue;
+					}
+				}
+				count = 0;row = row + 1;
+				$('#secretField').val("");
+			});
+			$('#secretField').keyup(function(){
+				if(row==6){return;}
+				var startIndex = row*5;
+				let typingWord = $('#secretField').val().toUpperCase();
+				if(typingWord.length > 5){
+					return;
+				}
+				if(/^[a-zA-Z]*$/.test(typingWord)===false){
+					$('#secretField').val(typingWord.substring(0,typingWord.length-1));return;
+				}
+				for(let i=startIndex,j=0;i<startIndex+typingWord.length,j<5;i++,j++){
+					$('.row').children('.col:eq('+i+')').html(typingWord.charAt(j));
+				}
+				col = typingWord.length;count = typingWord.length;
+				$('.details').html("count = "+count+", col = "+col+", row = "+row+", startIndex = "+startIndex);
+			});
+		});
+	</script>
+</body>
+</html>
